@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create, :decrement]
+  before_action :set_cart
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
 
@@ -71,7 +71,6 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to store_index_url }
       format.js { @current_item = line_item }
-
     end
   end
   private

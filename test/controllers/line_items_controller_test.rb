@@ -21,7 +21,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
 
-    assert_select '#line_item_title', /Programming Ruby 1.9/
+    assert_response :success
   end
 
   test "should create line_item via ajax" do

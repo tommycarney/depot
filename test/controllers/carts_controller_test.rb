@@ -7,7 +7,7 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get index" do
     get carts_url
-    assert_response :success
+    assert_redirected_to store_index_url, notice: "Invalid cart"
   end
 
   test "should get new" do
