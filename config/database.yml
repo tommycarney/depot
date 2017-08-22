@@ -22,9 +22,3 @@ test:
   <<: *default
   database: depot_test
   host: localhost
-
-production:
-  <<: *default
-  database: depot_production
-  username: depot
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
