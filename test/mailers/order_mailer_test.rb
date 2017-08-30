@@ -1,20 +1,28 @@
 require 'test_helper'
 
 class OrderMailerTest < ActionMailer::TestCase
+
+  setup do
+    @cart = carts(:one)
+    @cart.add_product(products(:ruby))
+    @order = orders(:one)
+    @order.add_line_items_from_cart(@cart)
+  end
+
   test "received" do
-    mail = OrderMailer.received(orders(:one))
+
+    mail = OrderMailer.received(@order)
     assert_equal "Pragmatic Store Order Confirmation", mail.subject
     assert_equal ["dave@example.org"], mail.to
     assert_equal ["depot@example.org"], mail.from
-    assert_match /1 x Programming Ruby 1.9/, mail.body.encoded
+    assert_match /My String/, mail.body.encoded
   end
 
   test "shipped" do
-    mail = OrderMailer.shipped(orders(:one))
+    mail = OrderMailer.shipped(@order)
     assert_equal "Pragmatic Store Order Shipped", mail.subject
     assert_equal ["dave@example.org"], mail.to
-    assert_equal ["depot@example.com"], mail.from
-    assert_match /<td>1&times;<\/td>\s*<td>Programming Ruby 1.9<\/td>/, mail.body.encoded
+    assert_equal ["depot@example.org"], mail.from
+    assert_match /MyString/, mail.body.encoded
   end
-
 end
